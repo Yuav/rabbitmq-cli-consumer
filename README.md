@@ -33,18 +33,11 @@ Update and install:
     $ sudo apt-get update
     $ sudo apt-get install rabbitmq-cli-consumer
 
-## Create .deb package from source files
+## Create .deb package for service install
 
-    #!/bin/bash
-    sudo apt-get install golang gccgo-go rubygems -y
-    gem install fpm
-    mkdir ~/gocode
-    export GOPATH=~/gocode
-    go get github.com/ricbra/rabbitmq-cli-consumer
-    go build github.com/ricbra/rabbitmq-cli-consumer
-    ln -s $GOPATH/src/github.com/ricbra/rabbitmq-cli-consumer/rabbitmq-cli-consumer deb/usr/bin/rabbitmq-cli-consumer
-    VERSION=`deb/usr/bin/rabbitmq-cli-consumer --version|awk '{print $3}`
-    fpm -s dir -t deb -C deb --name rabbitmq-cli-consumer --version $VERSION --description "Consume RabbitMQ messages into any cli program" --config-files etc/rabbitmq-cli-consumer.conf    
+    sudo apt-get install golang gccgo-go ruby -y
+    sudo gem install fpm
+    ./build_service_deb.sh
 
 ## Binary
 
